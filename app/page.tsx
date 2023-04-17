@@ -1,91 +1,70 @@
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
-import styles from './page.module.css'
-
-const inter = Inter({ subsets: ['latin'] })
+import Image from "next/image";
+import styles from "./page.module.css";
 
 export default function Home() {
   return (
     <main className={styles.main}>
       <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>app/page.tsx</code>
-        </p>
+        <div>
+          <h3>investigraph</h3>
+          <p>etl pipeline for follow the money investigations</p>
+        </div>
         <div>
           <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
+            href="https://investigativedata.io"
             target="_blank"
             rel="noopener noreferrer"
           >
-            By{' '}
+            By{" "}
             <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
+              src="https://cdn.investigativedata.org/logo.png"
+              alt="investigativedata.io Logo"
+              width={25}
+              height={25}
               priority
             />
           </a>
         </div>
       </div>
 
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-        <div className={styles.thirteen}>
-          <Image src="/thirteen.svg" alt="13" width={40} height={31} priority />
+      <div className={styles.overview}>
+        <div className={styles.overviewItem}>
+          <span>1</span>
+          <h2 className="">Discover a new data source</h2>
+          <p className="">
+            no matter if you find something interesting online, or a
+            whistleblower sends you over a sql dump:{" "}
+            <strong>investigraph</strong> provides adapters to load data in
+            common formats from remote sources, apis, databases or local files.
+          </p>
+        </div>
+        <div className={styles.overviewItem}>
+          <span>2</span>
+          <h2 className="">Integrate into your catalog</h2>
+          <p className="">
+            <strong>investigraph</strong> helps with a complete etl pipeline to
+            integrate, transform and periodically update your data, all within a
+            simple UI and building on top of industry-standard etl frameworks.
+          </p>
+        </div>
+        <div className={styles.overviewItem}>
+          <span>3</span>
+          <h2 className="">Find new leads</h2>
+          <p className="">
+            because <strong>investigraph</strong> uses a common, standardized
+            data model for all datasets, it is seamless to cross-reference every
+            data point with interesting matches within your catalog to find new
+            story hints.
+          </p>
         </div>
       </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://beta.nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={inter.className}>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p className={inter.className}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={inter.className}>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p className={inter.className}>Explore the Next.js 13 playground.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={inter.className}>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p className={inter.className}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
+      <footer className={styles.footer}>
+        <strong>investigraph</strong> is a project by{" "}
+        <a href="https://investigativedata.io">investigativedata.io</a> and is
+        funded by{" "}
+        <a href="https://github.com/media-tech-lab">Media Tech Lab Bayern</a> |{" "}
+        <a href="https://github.com/investigativedata/investigraph">github</a>
+      </footer>
     </main>
-  )
+  );
 }

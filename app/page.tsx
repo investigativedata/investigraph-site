@@ -9,7 +9,7 @@ export default function Home() {
           <h3>investigraph</h3>
           <p>data catalog and pipeline for follow the money investigations</p>
         </div>
-        <div>
+        <div className={styles.byio}>
           <a
             href="https://investigativedata.io"
             target="_blank"

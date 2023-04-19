@@ -5,6 +5,7 @@
   align-items: center;
   padding: 6rem;
   min-height: 100vh;
+  max-width: 100%;
 }
 
 .description {
@@ -46,104 +47,39 @@
   font-size: 1rem;
 }
 
-.overviewItem span {
-  display: block;
-  width: 40px;
-  height: 40px;
-  margin: auto;
-  padding: 10px;
-  font-size: 20px;
-  font-weight: bold;
-  color: var(--color-gray-lilac);
-  background-color: var(--color-viva-magenta);
-  border-radius: 50%;
-  text-align: center;
-  margin-bottom: 0.5rem;
-}
-
 .overviewItem h2 {
   padding-bottom: 1rem;
 }
 
-.card {
-  padding: 1rem 1.2rem;
-  border-radius: var(--border-radius);
-  /* background: var(--color-agate-gray); */
-  /* border: 1px solid var(--color-viva-magenta); */
-  transition: background 200ms, border 200ms;
-}
-
-.card span {
-  display: inline-block;
-  transition: transform 200ms;
-}
-
-.card h2 {
-  font-weight: 600;
-  margin-bottom: 0.7rem;
-}
-
-.card p {
-  margin: 0;
-  opacity: 0.6;
-  font-size: 1rem;
-  line-height: 1.5;
-  max-width: 34ch;
-}
-
 /* Mobile and Tablet */
 @media (max-width: 1023px) {
-  .content {
-    padding: 4rem;
-  }
-
-  .grid {
-    grid-template-columns: 1fr;
-    margin-bottom: 120px;
-    max-width: 320px;
-    text-align: center;
-  }
-
-  .card {
-    padding: 1rem 2.5rem;
-  }
-
-  .card h2 {
-    margin-bottom: 0.5rem;
-  }
-
-  .description {
-    font-size: 0.8rem;
-  }
-
-  .description a {
+  .main {
     padding: 1rem;
   }
 
-  .description p,
-  .description div {
-    display: flex;
-    justify-content: center;
-    position: fixed;
+  .overview {
     width: 100%;
+    max-width: 100%;
+    text-align: left;
+  }
+
+  .overview h2 {
+    font-size: 1.2rem;
+  }
+
+  .description {
+    font-size: 1.3rem;
+    padding-bottom: 1.5rem;
   }
 
   .description p {
-    align-items: center;
-    inset: 0 0 auto;
-    padding: 2rem 1rem 1.4rem;
-    border-radius: 0;
-    border: none;
+    font-size: 1rem;
   }
 
-  .description div {
-    align-items: flex-end;
-    pointer-events: none;
-    inset: auto 0 0;
-    padding: 2rem;
-    height: 200px;
-    z-index: 1;
+  .byio {
+    display: none;
   }
+
 }
 
 .footer {

@@ -7,7 +7,7 @@ export default function Home() {
       <div className={styles.description}>
         <div>
           <h3>investigraph</h3>
-          <p>etl pipeline for follow the money investigations</p>
+          <p>data catalog and pipeline for follow the money investigations</p>
         </div>
         <div>
           <a
@@ -29,8 +29,7 @@ export default function Home() {
 
       <div className={styles.overview}>
         <div className={styles.overviewItem}>
-          <span>1</span>
-          <h2 className="">Discover a new data source</h2>
+          <h2 className="">1. Discover a new data source</h2>
           <p className="">
             no matter if you find something interesting online, or a
             whistleblower sends you over a sql dump:{" "}
@@ -39,17 +38,15 @@ export default function Home() {
           </p>
         </div>
         <div className={styles.overviewItem}>
-          <span>2</span>
-          <h2 className="">Integrate into your catalog</h2>
+          <h2 className="">2. Integrate into your catalog</h2>
           <p className="">
-            <strong>investigraph</strong> helps with a complete etl pipeline to
+            <strong>investigraph</strong> helps with a complete pipeline to
             integrate, transform and periodically update your data, all within a
             simple UI and building on top of industry-standard etl frameworks.
           </p>
         </div>
         <div className={styles.overviewItem}>
-          <span>3</span>
-          <h2 className="">Find new leads</h2>
+          <h2 className="">3. Find new leads</h2>
           <p className="">
             because <strong>investigraph</strong> uses a common, standardized
             data model for all datasets, it is seamless to cross-reference every

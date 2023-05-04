@@ -1,3 +1,9 @@
+interface IStats {
+  entities: number;
+  things?: number;
+  intervals?: number;
+}
+
 interface IResource {
   url: string;
   name: string;
@@ -20,7 +26,7 @@ interface IDatasetPublisher {
   country_label?: string;
 }
 
-export interface INKDatasetBase {
+interface INKDatasetBase {
   name: string;
   title: string;
   summary?: string;
@@ -35,9 +41,11 @@ export interface INKDataset extends INKDatasetBase {
   children: Array<string>;
   publisher?: IDatasetPublisher;
   resources: Array<IResource>;
+  stats?: IStats;
 }
 
 export interface INKCatalog {
   updated_at?: string;
   datasets: Array<INKDataset>;
+  stats?: IStats;
 }

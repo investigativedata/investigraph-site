@@ -1,51 +1,63 @@
-interface IStats {
-  entities: number;
-  things?: number;
-  intervals?: number;
+interface ICountryStats {
+  readonly code: string;
+  readonly count: number;
+  readonly label: string;
+}
+
+interface ISchemataStats {
+  readonly name: string;
+  readonly count: number;
+  readonly label: string;
+  readonly plural: string;
+}
+
+export interface IThingsStats {
+  readonly total: number
+  readonly countries: ICountryStats[]
+  readonly schemata: ISchemataStats[]
 }
 
 interface IResource {
-  url: string;
-  name: string;
-  path: string;
-  sha1: string;
-  timestamp: string;
-  dataset: string;
-  mime_type: string;
-  mime_type_label: string;
-  size: number;
-  title: string;
+  readonly url: string;
+  readonly name: string;
+  readonly path: string;
+  readonly sha1: string;
+  readonly timestamp: string;
+  readonly dataset: string;
+  readonly mime_type: string;
+  readonly mime_type_label: string;
+  readonly size: number;
+  readonly title: string;
 }
 
 interface IDatasetPublisher {
-  name: string;
-  url?: string;
-  description?: string;
-  official: boolean;
-  country?: string;
-  country_label?: string;
+  readonly name: string;
+  readonly url?: string;
+  readonly description?: string;
+  readonly official: boolean;
+  readonly country?: string;
+  readonly country_label?: string;
 }
 
 interface INKDatasetBase {
-  name: string;
-  title: string;
-  summary?: string;
-  url?: string;
-  category?: string;
-  frequency?: string;
+  readonly name: string;
+  readonly title: string;
+  readonly summary?: string;
+  readonly url?: string;
+  readonly category?: string;
+  readonly frequency?: string;
 }
 
 export interface INKDataset extends INKDatasetBase {
-  updated_at: string;
-  version: string;
-  children: Array<string>;
-  publisher?: IDatasetPublisher;
-  resources: Array<IResource>;
-  stats?: IStats;
+  readonly updated_at: string;
+  readonly version: string;
+  readonly children: Array<string>;
+  readonly publisher?: IDatasetPublisher;
+  readonly resources: Array<IResource>;
+  readonly things?: IThingsStats;
 }
 
 export interface INKCatalog {
-  updated_at?: string;
-  datasets: Array<INKDataset>;
-  stats?: IStats;
+  readonly updated_at?: string;
+  readonly datasets: Array<INKDataset>;
 }

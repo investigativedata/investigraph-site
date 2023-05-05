@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "@mui/joy/Link";
-import type { INKDataset } from "~/lib/ftm/types";
+import type { INKDataset, IThingsStats } from "~/lib/ftm/types";
 
 import Box from "@mui/joy/Box";
 import Button from "@mui/joy/Button";
@@ -11,10 +11,25 @@ import Typography from "@mui/joy/Typography";
 import LaunchIcon from "@mui/icons-material/Launch";
 import SearchIcon from "@mui/icons-material/Search";
 
+const ThingsStats = ({ things }: { things: IThingsStats }) => (
+  <>
+    <div>
+      <Typography level="body3">Entities:</Typography>
+      <Typography fontWeight="lg">{things.total}</Typography>
+    </div>
+    {things.countries.length > 0 ? (
+      <div>
+        <Typography level="body3">Countries:</Typography>
+        <Typography fontWeight="lg">{things.countries.length}</Typography>
+      </div>
+    ) : null}
+  </>
+);
+
 export default function Dataset({ dataset }: { dataset: INKDataset }) {
   return (
     <Card variant="outlined" sx={{ width: "100%", marginBottom: "1rem" }}>
-      <Typography level="body2">{dataset.updated_at}</Typography>
+      <Typography level="body2">Last updated: {dataset.updated_at}</Typography>
       <Typography level="h2" fontSize="xl" sx={{ mb: 0.5 }}>
         {dataset.title}
       </Typography>
@@ -30,10 +45,7 @@ export default function Dataset({ dataset }: { dataset: INKDataset }) {
       </Button>
       <Typography level="body1">{dataset.summary}</Typography>
       <Box sx={{ display: "flex", columnGap: "1rem" }}>
-        <div>
-          <Typography level="body3">Entities:</Typography>
-          <Typography fontWeight="lg">10.000</Typography>
-        </div>
+        {dataset.things ? <ThingsStats things={dataset.things} /> : null}
         {dataset.publisher ? (
           <div>
             <Typography level="body3">Publisher:</Typography>

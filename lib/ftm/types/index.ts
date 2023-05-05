@@ -1,1 +1,1 @@
-export type { INKDataset, INKCatalog } from "./dataset";
+export type { INKDataset, INKCatalog, IThingsStats } from "./dataset";

@@ -1,14 +1,16 @@
 "use client";
 
+import type { INKDataset } from "~/lib/ftm/types";
+
 import Link from "@mui/joy/Link";
 import Box from "@mui/joy/Box";
 import Table from "@mui/joy/Table";
 import Typography from "@mui/joy/Typography";
 import LaunchIcon from "@mui/icons-material/Launch";
 import Button from "@mui/joy/Button";
-import type { INKDataset } from "~/lib/ftm/types";
 import { getDataset, getCatalog } from "~/lib/api";
 import { Page } from "~/components";
+import { CountryFlag, DateDisplay } from "~/lib/ftm/components";
 
 type Params = { dataset: string };
 
@@ -16,7 +18,7 @@ export default async function DatasetPage({ params }: { params: Params }) {
   const dataset = await getDataset(params.dataset);
   return (
     <Page title={dataset.title}>
-      <Typography level="body2">Last updated: {dataset.updated_at}</Typography>
+      <Typography level="body2">Last updated: <DateDisplay value={dataset.updated_at} full /></Typography>
       <Button
         aria-label={`api url for ${dataset.title}`}
         variant="plain"
@@ -59,14 +61,18 @@ export default async function DatasetPage({ params }: { params: Params }) {
           <Typography level="h3">Countries</Typography>
           <Table aria-label="counries entities count">
             <tbody>
-              {dataset.things.countries.map((s) => (
-                <tr key={s.code}>
-                  <td>{s.label}</td>
-                  <td>
-                    <Typography color="primary">{s.count}</Typography>
-                  </td>
-                </tr>
-              ))}
+              {dataset.things.countries
+                .sort((a, b) => b.count - a.count)
+                .map((s) => (
+                  <tr key={s.code}>
+                    <td>
+                      <CountryFlag iso={s.code} /> {s.label}
+                    </td>
+                    <td>
+                      <Typography color="primary">{s.count}</Typography>
+                    </td>
+                  </tr>
+                ))}
             </tbody>
           </Table>
         </Box>

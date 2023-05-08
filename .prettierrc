@@ -1,0 +1,5 @@
+{
+    "importOrder": ["^react$", "^next/(.*)$","^@mui/(.*)$","^~/lib/(.*)$", "^~/(.*)$", "^[./]" ],
+    "importOrderSeparation": true,
+    "importOrderSortSpecifiers": true
+}

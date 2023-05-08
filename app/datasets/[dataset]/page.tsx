@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 
-import { getCatalog, getDataset } from "~/lib/api";
-
+import api from "~/api";
 import Page from "~/components/Page";
 import DatasetScreen from "~/screens/DatasetScreen";
 
@@ -12,7 +11,7 @@ export async function generateMetadata({
 }: {
   params: Params;
 }): Promise<Metadata> {
-  const dataset = await getDataset(params.dataset);
+  const dataset = await api.getDataset(params.dataset);
   return {
     title: dataset.title,
     description: dataset.summary,
@@ -28,7 +27,7 @@ const breadcrumbs = [
 ];
 
 export default async function DatasetPage({ params }: { params: Params }) {
-  const dataset = await getDataset(params.dataset);
+  const dataset = await api.getDataset(params.dataset);
   return (
     <Page crumbs={breadcrumbs}>
       <DatasetScreen dataset={dataset} />
@@ -37,6 +36,6 @@ export default async function DatasetPage({ params }: { params: Params }) {
 }
 
 export async function generateStaticParams() {
-  const catalog = await getCatalog();
+  const catalog = await api.getCatalog();
   return catalog.datasets.map((d) => ({ dataset: d.name }));
 }

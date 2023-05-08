@@ -1,14 +1,14 @@
 "use client";
 
 import CssBaseline from "@mui/joy/CssBaseline";
-import Grid from "@mui/joy/Grid";
 import { CssVarsProvider } from "@mui/joy/styles";
 
-import type { Breadrumb } from "~/components/common/Breadcrumbs";
+import type { Breadrumb } from "~/components/Breadcrumbs";
 import { SITE } from "~/config";
 import theme from "~/theme";
 
-import Header from "./Header";
+import Breadcrumbs from "./Breadcrumbs";
+import Navbar from "./Navbar";
 import styles from "./Page.module.css";
 
 type TPage = { title?: string; crumbs: Breadrumb[] };
@@ -21,16 +21,10 @@ export default function Page({
   return (
     <CssVarsProvider theme={theme}>
       <CssBaseline />
+      <Navbar />
       <section className={styles.page}>
-        <Header title={title} crumbs={crumbs} />
-        <Grid
-          container
-          rowSpacing={1}
-          columnSpacing={{ xs: 1, sm: 2, md: 3 }}
-          sx={{ width: "100%" }}
-        >
-          {children}
-        </Grid>
+        <Breadcrumbs crumbs={crumbs} />
+        {children}
       </section>
     </CssVarsProvider>
   );

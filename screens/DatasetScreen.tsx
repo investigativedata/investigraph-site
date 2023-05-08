@@ -17,7 +17,7 @@ import { Headline, Paragraph } from "~/components/common";
 
 export default function DatasetScreen({ dataset }: { dataset: INKDataset }) {
   return (
-    <Stack>
+    <Stack sx={{ position: "relative" }}>
       <Headline level="h2" color="primary">
         {dataset.title}
       </Headline>

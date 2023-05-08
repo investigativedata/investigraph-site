@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 import { getCatalog, getDataset } from "~/lib/api";
 
-import { Page } from "~/components";
+import Page from "~/components/Page";
 import DatasetScreen from "~/screens/DatasetScreen";
 
 type Params = { dataset: string };

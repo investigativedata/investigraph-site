@@ -9,7 +9,7 @@ export default async function CatalogPage() {
   const catalog = await getCatalog();
   return (
     <Page title="Catalog">
-      <Catalog catalog={catalog} />
+      <Catalog catalog={catalog} detail={true} />
     </Page>
   );
 }

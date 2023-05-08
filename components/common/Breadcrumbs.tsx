@@ -9,7 +9,13 @@ export default function Breadcrumbs({ crumbs }: { crumbs: Breadrumb[] }) {
   return crumbs.length > 1 ? (
     <MuiBreadcrumbs>
       {crumbs.map(({ label, url }) =>
-        url ? <Link href={url}>{label}</Link> : <Typography>{label}</Typography>
+        url ? (
+          <Link key={label} href={url}>
+            {label}
+          </Link>
+        ) : (
+          <Typography key={label}>{label}</Typography>
+        )
       )}
     </MuiBreadcrumbs>
   ) : null;

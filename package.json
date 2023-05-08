@@ -30,6 +30,7 @@
     "typescript": "5.0.3"
   },
   "devDependencies": {
+    "eslint-plugin-unused-imports": "^2.0.0",
     "sass": "^1.62.1"
   }
 }

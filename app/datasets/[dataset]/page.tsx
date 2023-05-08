@@ -1,82 +1,37 @@
-"use client";
+import type { Metadata } from "next";
 
-import type { INKDataset } from "~/lib/ftm/types";
+import { getCatalog, getDataset } from "~/lib/api";
 
-import Link from "@mui/joy/Link";
-import Box from "@mui/joy/Box";
-import Table from "@mui/joy/Table";
-import Typography from "@mui/joy/Typography";
-import LaunchIcon from "@mui/icons-material/Launch";
-import Button from "@mui/joy/Button";
-import { getDataset, getCatalog } from "~/lib/api";
 import { Page } from "~/components";
-import { CountryFlag, DateDisplay } from "~/lib/ftm/components";
+import DatasetScreen from "~/screens/DatasetScreen";
 
 type Params = { dataset: string };
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Params;
+}): Promise<Metadata> {
+  const dataset = await getDataset(params.dataset);
+  return {
+    title: dataset.title,
+    description: dataset.summary,
+  };
+}
+
+const breadcrumbs = [
+  {
+    label: "Catalog",
+    url: "/datasets",
+  },
+  { label: "Dataset" },
+];
 
 export default async function DatasetPage({ params }: { params: Params }) {
   const dataset = await getDataset(params.dataset);
   return (
-    <Page title={dataset.title}>
-      <Typography level="body2">Last updated: <DateDisplay value={dataset.updated_at} full /></Typography>
-      <Button
-        aria-label={`api url for ${dataset.title}`}
-        variant="plain"
-        color="neutral"
-        size="sm"
-        sx={{ position: "absolute", top: "0.5rem", right: "0.5rem" }}
-        endDecorator={<LaunchIcon />}
-      >
-        Api
-      </Button>
-      <Typography level="body1">{dataset.summary}</Typography>
-
-      {dataset.publisher ? (
-        <div>
-          <Typography level="h3">Publisher</Typography>
-          {dataset.publisher.url ? (
-            <Link href={dataset.publisher.url}>{dataset.publisher.name}</Link>
-          ) : (
-            <Typography>{dataset.publisher.name}</Typography>
-          )}
-          <Typography level="body1">{dataset.publisher.description}</Typography>
-        </div>
-      ) : null}
-
-      {dataset.things ? (
-        <Box sx={{ width: "100%" }}>
-          <Typography level="h3">Schemata</Typography>
-          <Table aria-label="schemata entities count">
-            <tbody>
-              {dataset.things.schemata.map((s) => (
-                <tr key={s.name}>
-                  <td>{s.plural}</td>
-                  <td>
-                    <Typography color="primary">{s.count}</Typography>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </Table>
-          <Typography level="h3">Countries</Typography>
-          <Table aria-label="counries entities count">
-            <tbody>
-              {dataset.things.countries
-                .sort((a, b) => b.count - a.count)
-                .map((s) => (
-                  <tr key={s.code}>
-                    <td>
-                      <CountryFlag iso={s.code} /> {s.label}
-                    </td>
-                    <td>
-                      <Typography color="primary">{s.count}</Typography>
-                    </td>
-                  </tr>
-                ))}
-            </tbody>
-          </Table>
-        </Box>
-      ) : null}
+    <Page crumbs={breadcrumbs}>
+      <DatasetScreen dataset={dataset} />
     </Page>
   );
 }

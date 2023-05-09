@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 
+import { notFound, redirect } from "next/navigation";
+
+import { getEntityUrl, getEntityUrlParams } from "~/lib/ftm";
 import type { IEntityDatum, IEntityUrlParams } from "~/lib/ftm/types";
 
 import api from "~/api";
@@ -29,7 +32,14 @@ const getEntity = async (params: Params): Promise<IEntityDatum> =>
 
 export default async function EntityPage({ params }: { params: Params }) {
   const dataset = await api.getDataset(params.dataset);
+  if (!dataset) notFound();
   const entity = await getEntity(params);
+  if (!entity) notFound(); // FIXME handle better error
+  const { slug } = getEntityUrlParams(entity);
+  if (slug[1] !== params.slug[1] || entity.id !== params.slug[0]) {
+    const urlPrefix = `/datasets/${params.dataset}/entities`;
+    redirect(getEntityUrl(entity, urlPrefix));
+  }
   const crumbs = [
     {
       label: "Catalog",

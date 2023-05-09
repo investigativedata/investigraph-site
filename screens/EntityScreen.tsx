@@ -2,11 +2,14 @@
 
 import Box from "@mui/joy/Box";
 import Chip from "@mui/joy/Chip";
+import List from "@mui/joy/List";
+import ListItem from "@mui/joy/ListItem";
 import Stack from "@mui/joy/Stack";
 
 import { getProxy } from "~/lib/ftm";
 import {
   EntityCaption,
+  EntityLink,
   EntityProperty,
   PropertyStack,
   PropertyTable,
@@ -18,6 +21,7 @@ import { Headline } from "~/components/common/typo";
 
 type Props = {
   entity: TEntity;
+  reversedEntities: TEntity[];
 };
 
 const stackProps: string[] = ["summary", "description", "note", "abstract"];
@@ -55,6 +59,20 @@ export default function EntitiesScreen(props: Props) {
       <PropertyStack entity={entity} props={stackProps} />
       <Headline level="h5">Properties</Headline>
       <PropertyTable entity={entity} props={tableProps} />
+      {props.reversedEntities.length > 0 && (
+        <Stack>
+          <Headline level="h4">
+            Referenced by {props.reversedEntities.length} other entities
+          </Headline>
+          <List>
+            {props.reversedEntities.map((e) => (
+              <ListItem key={e.id}>
+                <EntityLink entity={e} icon={true} />
+              </ListItem>
+            ))}
+          </List>
+        </Stack>
+      )}
     </Box>
   );
 }

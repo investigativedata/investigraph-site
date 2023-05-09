@@ -40,6 +40,11 @@ export default async function EntityPage({ params }: { params: Params }) {
     const urlPrefix = `/datasets/${params.dataset}/entities`;
     redirect(getEntityUrl(entity, urlPrefix));
   }
+
+  const { entities: reversedEntities } = await api.getEntities(params.dataset, {
+    reverse: entity.id,
+  });
+
   const crumbs = [
     {
       label: "Catalog",
@@ -59,7 +64,7 @@ export default async function EntityPage({ params }: { params: Params }) {
   ];
   return (
     <Page crumbs={crumbs}>
-      <EntityScreen entity={entity} />
+      <EntityScreen entity={entity} reversedEntities={reversedEntities} />
     </Page>
   );
 }

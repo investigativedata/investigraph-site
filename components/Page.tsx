@@ -4,17 +4,15 @@ import CssBaseline from "@mui/joy/CssBaseline";
 import { CssVarsProvider } from "@mui/joy/styles";
 
 import type { Breadrumb } from "~/components/Breadcrumbs";
-import { SITE } from "~/config";
 import theme from "~/theme";
 
 import Breadcrumbs from "./Breadcrumbs";
 import Navbar from "./Navbar";
 import styles from "./Page.module.css";
 
-type TPage = { title?: string; crumbs: Breadrumb[] };
+type TPage = { crumbs: Breadrumb[] };
 
 export default function Page({
-  title = SITE,
   crumbs,
   children,
 }: React.PropsWithChildren<TPage>) {

@@ -16,7 +16,7 @@ type Props = {
 
 export default function EntitiesScreen(props: Props) {
   const { dataset, entities } = props;
-  const urlPrefix = `/datasets/${dataset.name}/`;
+  const urlPrefix = `/datasets/${dataset.name}/entities/`;
   return (
     <Context.Provider value={{ urlPrefix }}>
       <List>

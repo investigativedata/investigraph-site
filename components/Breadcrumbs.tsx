@@ -3,18 +3,18 @@ import Typography from "@mui/joy/Typography";
 
 import Link from "./common/Link";
 
-export type Breadrumb = { label: string; url?: string };
+export type Breadrumb = { label: string | React.ReactNode; url?: string };
 
 export default function Breadcrumbs({ crumbs }: { crumbs: Breadrumb[] }) {
   return crumbs.length > 1 ? (
     <MuiBreadcrumbs sx={{ padding: 0, fontSize: "sm" }}>
-      {crumbs.map(({ label, url }) =>
+      {crumbs.map(({ label, url }, ix) =>
         url ? (
-          <Link key={label} href={url}>
+          <Link key={ix} href={url}>
             {label}
           </Link>
         ) : (
-          <Typography sx={{ fontSize: "inherit" }} key={label}>
+          <Typography sx={{ fontSize: "inherit" }} key={ix}>
             {label}
           </Typography>
         )

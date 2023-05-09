@@ -2,9 +2,10 @@ import type { Metadata } from "next";
 
 import api from "~/api";
 import Page from "~/components/Page";
+import Ellipsis from "~/components/common/Ellipsis";
 import DatasetScreen from "~/screens/DatasetScreen";
 
-type Params = { dataset: string };
+type Params = { readonly dataset: string };
 
 export async function generateMetadata({
   params,
@@ -18,16 +19,16 @@ export async function generateMetadata({
   };
 }
 
-const breadcrumbs = [
-  {
-    label: "Catalog",
-    url: "/datasets",
-  },
-  { label: "Dataset" },
-];
-
 export default async function DatasetPage({ params }: { params: Params }) {
   const dataset = await api.getDataset(params.dataset);
+  const breadcrumbs = [
+    {
+      label: "Catalog",
+      url: "/datasets",
+    },
+    { label: <Ellipsis text={dataset.title} /> },
+  ];
+
   return (
     <Page crumbs={breadcrumbs}>
       <DatasetScreen dataset={dataset} />

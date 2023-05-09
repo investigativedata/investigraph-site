@@ -1,5 +1,8 @@
 "use client";
 
+import { usePathname } from "next/navigation";
+
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import LaunchIcon from "@mui/icons-material/Launch";
 import Box from "@mui/joy/Box";
 import Button from "@mui/joy/Button";
@@ -16,12 +19,26 @@ import type { INKDataset } from "~/lib/ftm/types";
 import { Headline, Paragraph } from "~/components/common";
 
 export default function DatasetScreen({ dataset }: { dataset: INKDataset }) {
+  const basePath = usePathname();
   return (
     <Stack sx={{ position: "relative" }}>
       <Headline level="h2" color="primary">
         {dataset.title}
       </Headline>
       <Paragraph sx={{ paddingBottom: 2 }}>{dataset.summary}</Paragraph>
+      <Button
+        href={`${basePath}/entities`}
+        component="a"
+        startDecorator={<ChevronRightIcon />}
+        variant="solid"
+        size="sm"
+        color="primary"
+        aria-label={`entities in ${dataset.title}`}
+        sx={{ mr: "auto", fw: 600, mb: 2 }}
+      >
+        Browse entities
+      </Button>
+
       <Grid container spacing={2} sx={{ flexGrow: 1 }}>
         <Grid sm={12} md={6}>
           <DatasetMeta dataset={dataset} />

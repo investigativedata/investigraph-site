@@ -7,7 +7,7 @@ type Params = { readonly dataset: string };
 
 export default async function EntitiesPage({ params }: { params: Params }) {
   const dataset = await api.getDataset(params.dataset);
-  const result = await api.getEntities(params.dataset, { limit: 10 });
+  const result = await api.getEntities(params.dataset, { limit: 100 });
   const crumbs = [
     {
       label: "Catalog",

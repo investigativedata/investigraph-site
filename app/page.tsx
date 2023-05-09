@@ -1,9 +1,14 @@
+import "@fontsource/quicksand";
+import "@fontsource/quicksand/700.css";
+import "@fontsource/inconsolata";
+import "./globals.css";
+
 import Image from "next/image";
 import styles from "./page.module.css";
 
 export default function Home() {
   return (
-    <main className={styles.main}>
+    <main>
       <div className={styles.description}>
         <div>
           <h3>investigraph</h3>
@@ -55,7 +60,7 @@ export default function Home() {
           </p>
         </div>
       </div>
-      <footer className={styles.footer}>
+      <footer>
         <strong>investigraph</strong> is a project by{" "}
         <a href="https://investigativedata.io">investigativedata.io</a> and is
         funded by{" "}

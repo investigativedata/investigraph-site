@@ -1,8 +1,9 @@
-import "./globals.css";
+import type { Metadata } from "next";
+import { SITE_TITLE, SITE_DESCRIPTION } from "~/config";
 
-export const metadata = {
-  title: "investigraph",
-  description: "etl pipeline for follow the money investigations",
+export const metadata: Metadata = {
+  title: SITE_TITLE,
+  description: SITE_DESCRIPTION,
 };
 
 export default function RootLayout({
@@ -12,9 +13,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
-        {children}
-      </body>
+      <body>{children}</body>
     </html>
   );
 }

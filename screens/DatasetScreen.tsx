@@ -66,7 +66,7 @@ export default function DatasetScreen({ dataset }: { dataset: INKDataset }) {
               </tbody>
             </Table>
           </Grid>
-          {dataset.things.countries.length && (
+          {dataset.things.countries.length > 0 && (
             <Grid sm={12} md={6}>
               <Headline level="h3">Countries</Headline>
               <Table aria-label="counries entities count">

@@ -20,11 +20,12 @@ import type { Entity, TEntity } from "~/lib/ftm/types";
 import { Headline } from "~/components/common/typo";
 
 type Props = {
-  entity: TEntity;
-  reversedEntities: TEntity[];
+  readonly entity: TEntity;
+  readonly reversed: { [key: string]: TEntity[] };
+  readonly reversedTotal: number;
 };
 
-const stackProps: string[] = ["summary", "description", "note", "abstract"];
+const stackProps: string[] = ["summary", "description", "notes", "abstract"];
 
 const hasProps = (props: string[], entity: Entity) => {
   for (const p of props) {
@@ -73,18 +74,25 @@ export default function EntitiesScreen(props: Props) {
           <PropertyTable entity={entity} props={tableProps} />
         </>
       )}
-      {props.reversedEntities.length > 0 && (
+      {props.reversedTotal > 0 && (
         <Stack>
           <Headline level="h4">
-            Referenced by {props.reversedEntities.length} other entities
+            Referenced by {props.reversedTotal} other entities
           </Headline>
-          <List>
-            {props.reversedEntities.map((e) => (
-              <ListItem key={e.id}>
-                <EntityLink entity={e} icon={true} />
-              </ListItem>
-            ))}
-          </List>
+          {Object.keys(props.reversed).map((schema) => (
+            <section key={schema}>
+              <Headline level="h5" color="primary">
+                {schema}
+              </Headline>
+              <List>
+                {props.reversed[schema].map((e) => (
+                  <ListItem key={e.id}>
+                    <EntityLink entity={e} icon={true} />
+                  </ListItem>
+                ))}
+              </List>
+            </section>
+          ))}
         </Stack>
       )}
     </Box>

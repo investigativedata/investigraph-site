@@ -20,7 +20,7 @@ export async function generateMetadata({
 }
 
 export default async function EntityPage({ params }: { params: Params }) {
-  const { dataset, entity, reversedEntities } = await getData(params);
+  const { dataset, entity, reversed, reversedTotal } = await getData(params);
   const crumbs = [
     {
       label: "Catalog",
@@ -41,7 +41,11 @@ export default async function EntityPage({ params }: { params: Params }) {
 
   return (
     <Page crumbs={crumbs}>
-      <EntityScreen entity={entity} reversedEntities={reversedEntities} />
+      <EntityScreen
+        entity={entity}
+        reversed={reversed}
+        reversedTotal={reversedTotal}
+      />
     </Page>
   );
 }

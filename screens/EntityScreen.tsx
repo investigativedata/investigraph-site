@@ -2,12 +2,11 @@
 
 import Box from "@mui/joy/Box";
 import Chip from "@mui/joy/Chip";
-import List from "@mui/joy/List";
-import ListItem from "@mui/joy/ListItem";
 import Stack from "@mui/joy/Stack";
 
-import { getProxy } from "~/lib/ftm";
+import { getProxy, getSchema } from "~/lib/ftm";
 import {
+  EntitiesTable,
   EntityCaption,
   EntityLink,
   EntityProperty,
@@ -17,7 +16,7 @@ import {
 } from "~/lib/ftm/components";
 import type { Entity, TEntity } from "~/lib/ftm/types";
 
-import { Headline } from "~/components/common/typo";
+import { Headline, Paragraph } from "~/components/common/typo";
 
 type Props = {
   readonly entity: TEntity;
@@ -58,7 +57,7 @@ export default function EntitiesScreen(props: Props) {
             <EntityProperty entity={entity} prop="country" />
           </Chip>
         )}
-        {entity.hasProperty("jurisdiction") && (
+        {!entity.hasProperty("country") && entity.hasProperty("jurisdiction") && (
           <Chip variant="soft" color="neutral" sx={{ width: "auto" }}>
             <EntityProperty entity={entity} prop="jurisdiction" />
           </Chip>
@@ -81,16 +80,14 @@ export default function EntitiesScreen(props: Props) {
           </Headline>
           {Object.keys(props.reversed).map((schema) => (
             <section key={schema}>
-              <Headline level="h5" color="primary">
-                {schema}
+              <Headline level="h5" color="neutral">
+                {getSchema(schema).plural}
               </Headline>
-              <List>
-                {props.reversed[schema].map((e) => (
-                  <ListItem key={e.id}>
-                    <EntityLink entity={e} icon={true} />
-                  </ListItem>
-                ))}
-              </List>
+              <Paragraph>{getSchema(schema).description}</Paragraph>
+              <EntitiesTable
+                schema={schema}
+                entities={props.reversed[schema]}
+              />
             </section>
           ))}
         </Stack>

@@ -33,8 +33,7 @@ const getReversedData = async (
   const { entities } = await api.getEntities(dataset, {
     schema,
     reverse: entityId,
-    dehydrate: true,
-    limit: 10,
+    nested: true,
     order_by: "-date",
   });
   return { schema, entities };

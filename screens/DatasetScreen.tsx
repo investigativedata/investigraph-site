@@ -43,13 +43,11 @@ export default function DatasetScreen({ dataset }: { dataset: INKDataset }) {
           <DatasetMeta dataset={dataset} />
         </Grid>
         <Grid sm={12} md={6}>
-          {dataset.publisher ? (
-            <PublisherMeta publisher={dataset.publisher} />
-          ) : null}
+          {dataset.publisher && <PublisherMeta publisher={dataset.publisher} />}
         </Grid>
       </Grid>
 
-      {dataset.things ? (
+      {dataset.things && (
         <Grid container spacing={2} sx={{ flexGrow: 1 }}>
           <Grid sm={12} md={6}>
             <Headline level="h3">Types of entities</Headline>
@@ -68,7 +66,7 @@ export default function DatasetScreen({ dataset }: { dataset: INKDataset }) {
               </tbody>
             </Table>
           </Grid>
-          {dataset.things.countries.length ? (
+          {dataset.things.countries.length && (
             <Grid sm={12} md={6}>
               <Headline level="h3">Countries</Headline>
               <Table aria-label="counries entities count">
@@ -88,9 +86,9 @@ export default function DatasetScreen({ dataset }: { dataset: INKDataset }) {
                 </tbody>
               </Table>
             </Grid>
-          ) : null}
+          )}
         </Grid>
-      ) : null}
+      )}
     </Stack>
   );
 }

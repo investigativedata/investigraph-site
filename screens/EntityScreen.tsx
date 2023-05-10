@@ -15,7 +15,7 @@ import {
   PropertyTable,
   Schema,
 } from "~/lib/ftm/components";
-import type { TEntity } from "~/lib/ftm/types";
+import type { Entity, TEntity } from "~/lib/ftm/types";
 
 import { Headline } from "~/components/common/typo";
 
@@ -26,11 +26,21 @@ type Props = {
 
 const stackProps: string[] = ["summary", "description", "note", "abstract"];
 
+const hasProps = (props: string[], entity: Entity) => {
+  for (const p of props) {
+    if (entity.hasProperty(p)) {
+      return true;
+    }
+  }
+  return false;
+};
+
 export default function EntitiesScreen(props: Props) {
   const entity = getProxy(props.entity);
   const tableProps = Array.from(entity.schema.getProperties(), (x) => x[0])
     .filter((p) => stackProps.indexOf(p) < 0)
     .filter((n) => n !== "name");
+  const hasTableProps = hasProps(tableProps, entity);
 
   return (
     <Box sx={{ paddingTop: 4 }}>
@@ -42,23 +52,27 @@ export default function EntitiesScreen(props: Props) {
         <Chip variant="soft" color="neutral" sx={{ width: "auto" }}>
           <Schema entity={entity} />
         </Chip>
-        {entity.hasProperty("country") ? (
+        {entity.hasProperty("country") && (
           <Chip variant="soft" color="neutral" sx={{ width: "auto" }}>
             <EntityProperty entity={entity} prop="country" />
           </Chip>
-        ) : null}
-        {entity.hasProperty("jurisdiction") ? (
+        )}
+        {entity.hasProperty("jurisdiction") && (
           <Chip variant="soft" color="neutral" sx={{ width: "auto" }}>
             <EntityProperty entity={entity} prop="jurisdiction" />
           </Chip>
-        ) : null}
+        )}
       </Stack>
       <Headline sx={{ marginTop: 0 }} level="h2" color="primary">
         <EntityCaption entity={entity} />
       </Headline>
       <PropertyStack entity={entity} props={stackProps} />
-      <Headline level="h5">Properties</Headline>
-      <PropertyTable entity={entity} props={tableProps} />
+      {hasTableProps && (
+        <>
+          <Headline level="h5">Properties</Headline>
+          <PropertyTable entity={entity} props={tableProps} />
+        </>
+      )}
       {props.reversedEntities.length > 0 && (
         <Stack>
           <Headline level="h4">

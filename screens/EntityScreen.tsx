@@ -88,6 +88,7 @@ export default function EntitiesScreen(props: Props) {
               <EntitiesTable
                 schema={schema}
                 entities={props.reversed[schema]}
+                detailUrl={getSchema(schema).isEdge}
               />
             </section>
           ))}

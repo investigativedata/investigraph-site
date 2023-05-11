@@ -35,7 +35,6 @@ export default async function EntitiesPage({
     featured: true,
     nested: true,
   };
-  console.log(query);
   const result = await api.getEntities(params.dataset, query);
   const crumbs = [
     {

@@ -4,7 +4,8 @@ import List from "@mui/joy/List";
 import ListItem from "@mui/joy/ListItem";
 import Stack from "@mui/joy/Stack";
 
-import { DatasetHeader, EntityCard } from "~/lib/ftm/components";
+import { DatasetHeader } from "~/lib/ftm/components/Dataset";
+import EntityCard from "~/lib/ftm/components/EntityCard";
 import type { INKDataset, TEntity } from "~/lib/ftm/types";
 
 import { Headline } from "~/components/common/typo";
@@ -23,7 +24,7 @@ export default function EntitiesScreen(props: Props) {
       </Headline>
       <List>
         {props.entities.map((e) => (
-          <ListItem key={e.id} style={{ display: "block"}}>
+          <ListItem key={e.id} style={{ display: "block" }}>
             <EntityCard entity={e} />
           </ListItem>
         ))}

@@ -10,12 +10,12 @@ import Table from "@mui/joy/Table";
 import Typography from "@mui/joy/Typography";
 
 import {
-  CountryFlag,
   DatasetHeader,
   DatasetMeta,
-  DateDisplay,
   PublisherMeta,
-} from "~/lib/ftm/components";
+} from "~/lib/ftm/components/Dataset";
+import CountryFlag from "~/lib/ftm/components/common/CountryFlag";
+import DateDisplay from "~/lib/ftm/components/common/Date";
 import type { INKDataset } from "~/lib/ftm/types";
 
 import { Headline, Paragraph } from "~/components/common";

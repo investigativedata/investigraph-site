@@ -5,15 +5,15 @@ import Chip from "@mui/joy/Chip";
 import Stack from "@mui/joy/Stack";
 
 import { getProxy, getSchema } from "~/lib/ftm";
+import EntitiesTable from "~/lib/ftm/components/EntitiesTable";
 import {
-  EntitiesTable,
   EntityCaption,
   EntityLink,
-  EntityProperty,
-  PropertyStack,
-  PropertyTable,
-  Schema,
-} from "~/lib/ftm/components";
+  EntitySchema,
+} from "~/lib/ftm/components/Entity";
+import EntityProperty from "~/lib/ftm/components/Property";
+import PropertyStack from "~/lib/ftm/components/PropertyStack";
+import PropertyTable from "~/lib/ftm/components/PropertyTable";
 import type { Entity, TEntity } from "~/lib/ftm/types";
 
 import { Headline, Paragraph } from "~/components/common/typo";
@@ -50,18 +50,19 @@ export default function EntitiesScreen(props: Props) {
         spacing={{ xs: 1, sm: 2 }}
       >
         <Chip variant="soft" color="neutral" sx={{ width: "auto" }}>
-          <Schema entity={entity} />
+          <EntitySchema entity={entity} />
         </Chip>
         {entity.hasProperty("country") && (
           <Chip variant="soft" color="neutral" sx={{ width: "auto" }}>
             <EntityProperty entity={entity} prop="country" />
           </Chip>
         )}
-        {!entity.hasProperty("country") && entity.hasProperty("jurisdiction") && (
-          <Chip variant="soft" color="neutral" sx={{ width: "auto" }}>
-            <EntityProperty entity={entity} prop="jurisdiction" />
-          </Chip>
-        )}
+        {!entity.hasProperty("country") &&
+          entity.hasProperty("jurisdiction") && (
+            <Chip variant="soft" color="neutral" sx={{ width: "auto" }}>
+              <EntityProperty entity={entity} prop="jurisdiction" />
+            </Chip>
+          )}
       </Stack>
       <Headline sx={{ marginTop: 0 }} level="h2" color="primary">
         <EntityCaption entity={entity} />

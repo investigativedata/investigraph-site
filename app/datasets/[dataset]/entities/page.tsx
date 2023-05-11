@@ -34,6 +34,7 @@ export default async function EntitiesPage({
     ...getPublicQuery(searchParams),
     featured: true,
     nested: true,
+    limit: 10,
   };
   const result = await api.getEntities(params.dataset, query);
   const crumbs = [

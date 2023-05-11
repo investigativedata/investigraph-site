@@ -19,24 +19,28 @@ import DateDisplay from "~/lib/ftm/components/common/Date";
 import type { INKDataset } from "~/lib/ftm/types";
 
 import { Headline, Paragraph } from "~/components/common";
+import Link from "~/components/common/Link";
 
 export default function DatasetScreen({ dataset }: { dataset: INKDataset }) {
   const basePath = usePathname();
+  const entitiesPath = `${basePath}/entities`;
+  const getSearchUrl = (param: string, value: string) =>
+    `${entitiesPath}?${param}=${value}`;
   return (
     <Stack sx={{ position: "relative", pt: 2 }}>
       <DatasetHeader dataset={dataset} />
-      <Button
-        href={`${basePath}/entities`}
-        component="a"
-        startDecorator={<ChevronRightIcon />}
-        variant="solid"
-        size="sm"
-        color="primary"
-        aria-label={`entities in ${dataset.title}`}
-        sx={{ mr: "auto", fw: 600, mt: 2, mb: 2 }}
-      >
-        Browse entities
-      </Button>
+      <Link href={entitiesPath}>
+        <Button
+          startDecorator={<ChevronRightIcon />}
+          variant="solid"
+          size="sm"
+          color="primary"
+          aria-label={`entities in ${dataset.title}`}
+          sx={{ mr: "auto", fw: 600, mt: 2, mb: 2 }}
+        >
+          Browse entities
+        </Button>
+      </Link>
 
       <Grid container spacing={2} sx={{ flexGrow: 1 }}>
         <Grid sm={12} md={6}>
@@ -47,7 +51,7 @@ export default function DatasetScreen({ dataset }: { dataset: INKDataset }) {
         </Grid>
       </Grid>
 
-      {dataset.things && (
+      {dataset.things.total > 0 && (
         <Grid container spacing={2} sx={{ flexGrow: 1 }}>
           <Grid sm={12} md={6}>
             <Headline level="h3">Types of entities</Headline>
@@ -57,10 +61,12 @@ export default function DatasetScreen({ dataset }: { dataset: INKDataset }) {
                   .sort((a, b) => b.count - a.count)
                   .map((s) => (
                     <tr key={s.name}>
-                      <td>{s.plural}</td>
                       <td>
-                        <Typography color="primary">{s.count}</Typography>
+                        <Link href={getSearchUrl("schema", s.name)}>
+                          {s.plural}
+                        </Link>
                       </td>
+                      <td>{s.count}</td>
                     </tr>
                   ))}
               </tbody>
@@ -76,11 +82,12 @@ export default function DatasetScreen({ dataset }: { dataset: INKDataset }) {
                     .map((s) => (
                       <tr key={s.code}>
                         <td>
-                          <CountryFlag iso={s.code} /> {s.label}
+                          <CountryFlag iso={s.code} />
+                          <Link href={getSearchUrl("country", s.code)}>
+                            {s.label}
+                          </Link>
                         </td>
-                        <td>
-                          <Typography color="primary">{s.count}</Typography>
-                        </td>
+                        <td>{s.count}</td>
                       </tr>
                     ))}
                 </tbody>

@@ -4,29 +4,43 @@ import Box from "@mui/joy/Box";
 import Chip from "@mui/joy/Chip";
 import Stack from "@mui/joy/Stack";
 
-import { getProxy } from "~/lib/ftm";
+import { getProxy, getSchema } from "~/lib/ftm";
+import EntitiesTable from "~/lib/ftm/components/EntitiesTable";
 import {
   EntityCaption,
-  EntityProperty,
-  PropertyStack,
-  PropertyTable,
-  Schema,
-} from "~/lib/ftm/components";
-import type { TEntity } from "~/lib/ftm/types";
+  EntityLink,
+  EntitySchema,
+} from "~/lib/ftm/components/Entity";
+import EntityProperty from "~/lib/ftm/components/Property";
+import PropertyStack from "~/lib/ftm/components/PropertyStack";
+import PropertyTable from "~/lib/ftm/components/PropertyTable";
+import type { Entity, TEntity } from "~/lib/ftm/types";
 
-import { Headline } from "~/components/common/typo";
+import { Headline, Paragraph } from "~/components/common/typo";
 
 type Props = {
-  entity: TEntity;
+  readonly entity: TEntity;
+  readonly reversed: { [key: string]: TEntity[] };
+  readonly reversedTotal: number;
 };
 
-const stackProps: string[] = ["summary", "description", "note", "abstract"];
+const stackProps: string[] = ["summary", "description", "notes", "abstract"];
+
+const hasProps = (props: string[], entity: Entity) => {
+  for (const p of props) {
+    if (entity.hasProperty(p)) {
+      return true;
+    }
+  }
+  return false;
+};
 
 export default function EntitiesScreen(props: Props) {
   const entity = getProxy(props.entity);
   const tableProps = Array.from(entity.schema.getProperties(), (x) => x[0])
     .filter((p) => stackProps.indexOf(p) < 0)
     .filter((n) => n !== "name");
+  const hasTableProps = hasProps(tableProps, entity);
 
   return (
     <Box sx={{ paddingTop: 4 }}>
@@ -36,25 +50,50 @@ export default function EntitiesScreen(props: Props) {
         spacing={{ xs: 1, sm: 2 }}
       >
         <Chip variant="soft" color="neutral" sx={{ width: "auto" }}>
-          <Schema entity={entity} />
+          <EntitySchema entity={entity} />
         </Chip>
-        {entity.hasProperty("country") ? (
+        {entity.hasProperty("country") && (
           <Chip variant="soft" color="neutral" sx={{ width: "auto" }}>
             <EntityProperty entity={entity} prop="country" />
           </Chip>
-        ) : null}
-        {entity.hasProperty("jurisdiction") ? (
-          <Chip variant="soft" color="neutral" sx={{ width: "auto" }}>
-            <EntityProperty entity={entity} prop="jurisdiction" />
-          </Chip>
-        ) : null}
+        )}
+        {!entity.hasProperty("country") &&
+          entity.hasProperty("jurisdiction") && (
+            <Chip variant="soft" color="neutral" sx={{ width: "auto" }}>
+              <EntityProperty entity={entity} prop="jurisdiction" />
+            </Chip>
+          )}
       </Stack>
       <Headline sx={{ marginTop: 0 }} level="h2" color="primary">
         <EntityCaption entity={entity} />
       </Headline>
       <PropertyStack entity={entity} props={stackProps} />
-      <Headline level="h5">Properties</Headline>
-      <PropertyTable entity={entity} props={tableProps} />
+      {hasTableProps && (
+        <>
+          <Headline level="h5">Properties</Headline>
+          <PropertyTable entity={entity} props={tableProps} />
+        </>
+      )}
+      {props.reversedTotal > 0 && (
+        <Stack>
+          <Headline level="h4">
+            Referenced by {props.reversedTotal} other entities
+          </Headline>
+          {Object.keys(props.reversed).map((schema) => (
+            <section key={schema}>
+              <Headline level="h5" color="neutral">
+                {getSchema(schema).plural}
+              </Headline>
+              <Paragraph>{getSchema(schema).description}</Paragraph>
+              <EntitiesTable
+                schema={schema}
+                entities={props.reversed[schema]}
+                detailUrl={getSchema(schema).isEdge}
+              />
+            </section>
+          ))}
+        </Stack>
+      )}
     </Box>
   );
 }

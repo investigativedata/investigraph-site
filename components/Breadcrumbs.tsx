@@ -6,7 +6,8 @@ import Link from "./common/Link";
 export type Breadrumb = { label: string | React.ReactNode; url?: string };
 
 export default function Breadcrumbs({ crumbs }: { crumbs: Breadrumb[] }) {
-  return crumbs.length > 1 ? (
+  if (crumbs.length == 0) return null;
+  return (
     <MuiBreadcrumbs sx={{ padding: 0, fontSize: "sm" }}>
       {crumbs.map(({ label, url }, ix) =>
         url ? (
@@ -20,5 +21,5 @@ export default function Breadcrumbs({ crumbs }: { crumbs: Breadrumb[] }) {
         )
       )}
     </MuiBreadcrumbs>
-  ) : null;
+  );
 }

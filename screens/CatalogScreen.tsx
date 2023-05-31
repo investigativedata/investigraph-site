@@ -2,7 +2,7 @@
 
 import Stack from "@mui/joy/Stack";
 
-import { Catalog } from "~/lib/ftm/components";
+import Catalog from "~/lib/ftm/components/Catalog";
 import type { INKCatalog } from "~/lib/ftm/types";
 
 import { Headline } from "~/components/common";

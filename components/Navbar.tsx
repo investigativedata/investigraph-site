@@ -21,7 +21,7 @@ export default function Navbar() {
   return (
     <Nav sx={{ boxShadow: "sm" }} role="navigation" className={styles.navbar}>
       <Typography level="h1" fontSize="md" color="neutral">
-        <HomeLink href="/">{SITE}</HomeLink>
+        <HomeLink href="/datasets">{SITE}</HomeLink>
       </Typography>
     </Nav>
   );

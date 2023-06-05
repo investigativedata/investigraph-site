@@ -13,7 +13,7 @@
     "@emotion/server": "^11.11.0",
     "@emotion/styled": "^11.10.8",
     "@fontsource/inconsolata": "^4.5.10",
-    "@fontsource/quicksand": "^4.5.12",
+    "@fontsource/quicksand": "^5.0.2",
     "@mui/icons-material": "^5.11.16",
     "@mui/joy": "^5.0.0-alpha.78",
     "@mui/x-data-grid": "^6.3.1",

@@ -61,7 +61,7 @@ export default function Home() {
           </p>
         </div>
         <div className={styles.overviewItem}>
-          <a className={styles.actionButton} href="https://docs.investigraph.dev/tutorial">
+          <a className={styles.actionButton} href="https://docs.investigraph.dev/tutorial/">
             get started
           </a>
         </div>

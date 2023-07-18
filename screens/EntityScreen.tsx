@@ -35,7 +35,7 @@ const hasProps = (props: string[], entity: Entity) => {
   return false;
 };
 
-export default function EntitiesScreen(props: Props) {
+export default function EntityScreen(props: Props) {
   const entity = getProxy(props.entity);
   const tableProps = Array.from(entity.schema.getProperties(), (x) => x[0])
     .filter((p) => stackProps.indexOf(p) < 0)

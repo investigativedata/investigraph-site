@@ -1,9 +1,10 @@
+import "@fontsource/inconsolata";
 import "@fontsource/quicksand";
 import "@fontsource/quicksand/700.css";
-import "@fontsource/inconsolata";
-import "./globals.css";
 
 import Image from "next/image";
+
+import "./globals.css";
 import styles from "./page.module.css";
 
 export default function Home() {
@@ -58,6 +59,11 @@ export default function Home() {
             data point with interesting matches within your catalog to find new
             story hints.
           </p>
+        </div>
+        <div className={styles.overviewItem}>
+          <a className={styles.actionButton} href="https://docs.investigraph.dev/tutorial/">
+            get started
+          </a>
         </div>
       </div>
       <footer>

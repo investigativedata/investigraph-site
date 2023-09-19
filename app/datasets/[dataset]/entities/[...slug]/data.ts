@@ -34,7 +34,7 @@ const getReversedData = async (
     schema,
     reverse: entityId,
     nested: true,
-    order_by: "-date",
+    // order_by: "-date",
   });
   return { schema, entities };
 };
@@ -57,8 +57,8 @@ export const getData = async (params: Params): Promise<Data> => {
     redirect(getEntityUrl(entity, urlPrefix));
   }
   const reversedResults = await Promise.all(
-    Object.keys(reversedResult.schemata).map((schema) =>
-      getReversedData(params.dataset, schema, entityId)
+    reversedResult.coverage.schemata.map((schema) =>
+      getReversedData(params.dataset, schema.name, entityId)
     )
   );
   const reversed = Object.fromEntries(

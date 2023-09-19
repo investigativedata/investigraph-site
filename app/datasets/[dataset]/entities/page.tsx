@@ -21,7 +21,7 @@ export default async function EntitiesPage({
 
   if (Object.keys(searchParams).length === 0) {
     // redirect to default schema if no query params
-    const defaultSchema = dataset.things.schemata.sort(
+    const defaultSchema = dataset.coverage.schemata.sort(
       (a, b) => b.count - a.count
     )[0];
     defaultSchema &&

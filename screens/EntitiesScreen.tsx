@@ -23,9 +23,9 @@ export default function EntitiesScreen(props: Props) {
       <Typography level="h3" color="primary" sx={{ mt: 4 }}>
         {result.total} entities
       </Typography>
-      {result.total < dataset.things.total && (
+      {result.total < dataset.coverage.entities && (
         <Typography level="body1" color="neutral">
-          This dataset contains {dataset.things.total} entities in total.
+          This dataset contains {dataset.coverage.entities} entities in total.
         </Typography>
       )}
       <List sx={{ mt: 2 }}>

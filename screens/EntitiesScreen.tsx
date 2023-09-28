@@ -10,6 +10,8 @@ import { DatasetHeader } from "~/lib/ftm/components/Dataset";
 import EntityCard from "~/lib/ftm/components/EntityCard";
 import type { INKDataset } from "~/lib/ftm/types";
 
+import SearchForm from "~/components/SearchForm";
+
 type Props = {
   readonly result: IEntitiesResult;
 };
@@ -18,6 +20,7 @@ export default function EntitiesScreen(props: Props) {
   const { result } = props;
   return (
     <Stack sx={{ position: "relative", pt: 2 }}>
+      <SearchForm />
       <Typography level="h3" color="primary" sx={{ mt: 4 }}>
         {result.total} entities
       </Typography>

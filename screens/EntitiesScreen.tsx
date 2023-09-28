@@ -24,7 +24,7 @@ export default function EntitiesScreen(props: Props) {
         {result.total} entities
       </Typography>
       {result.total < dataset.coverage.entities && (
-        <Typography level="body1" color="neutral">
+        <Typography level="body-lg" color="neutral">
           This dataset contains {dataset.coverage.entities} entities in total.
         </Typography>
       )}

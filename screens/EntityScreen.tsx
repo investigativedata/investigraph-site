@@ -70,7 +70,7 @@ export default function EntityScreen(props: Props) {
       <PropertyStack entity={entity} props={stackProps} />
       {hasTableProps && (
         <>
-          <Headline level="h5">Properties</Headline>
+          <Headline level="h4">Properties</Headline>
           <PropertyTable entity={entity} props={tableProps} />
         </>
       )}
@@ -81,7 +81,7 @@ export default function EntityScreen(props: Props) {
           </Headline>
           {Object.keys(props.reversed).map((schema) => (
             <section key={schema}>
-              <Headline level="h5" color="neutral">
+              <Headline level="h4" color="neutral">
                 {getSchema(schema).plural}
               </Headline>
               <Paragraph>{getSchema(schema).description}</Paragraph>

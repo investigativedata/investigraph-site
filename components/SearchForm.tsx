@@ -7,7 +7,7 @@ import Button from "@mui/joy/Button";
 import Input from "@mui/joy/Input";
 import Stack from "@mui/joy/Stack";
 
-export default () => {
+export default function SearchForm() {
   const router = useRouter();
   const url = usePathname();
   const [q, update] = useState(useSearchParams().get("q") || "");
@@ -30,4 +30,4 @@ export default () => {
       </Stack>
     </form>
   );
-};
+}

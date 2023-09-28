@@ -1,42 +1,21 @@
+@import url("https://cdn.investigativedata.org/style/base.min.css");
+
 :root {
-  --max-width: 1100px;
-  --border-radius: 12px;
-  --font-mono: "Inconsolata", ui-monospace, Menlo, Monaco, "Cascadia Mono",
-    "Segoe UI Mono", "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace",
-    "Source Code Pro", "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
-  --font-main: Quicksand, Arial, sans-serif;
-
-  --color-pale-dogwood: #edcdc2;
-  --color-gray-sand: #e5ccaf;
-  --color-gray-lilac: #d4cacd;
-  --color-viva-magenta: #bb2649;
-  --color-pale-khaki: #bfaf92;
-  --color-fields-of-rye: #b7a990;
-  --color-agate-gray: #b3b1a1;
-  --color-plein-air: #bfcad6;
-}
-
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
-
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
+  --max-width: 1200px;
+  --border-radius: 0;
+  --font-mono: "Sligoil Micro", "Inconsolata", ui-monospace, Menlo, Monaco,
+    "Cascadia Mono", "Segoe UI Mono", "Roboto Mono", "Oxygen Mono",
+    "Ubuntu Monospace", "Source Code Pro", "Fira Mono", "Droid Sans Mono",
+    "Courier New", monospace;
+  --font-main: "Inter", Arial, sans-serif;
+  --joy-fontFamily-body: var(--font-main);
+  --joy-fontFamily-display: var(--font-main);
 }
 
 body {
-  color: var(--color-viva-magenta);
-  background-color: var(--color-gray-lilac);
+  color: var(--blue);
+  background-color: var(--black);
   font-family: var(--font-main);
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
 }
 
 main {

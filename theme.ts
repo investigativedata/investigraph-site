@@ -20,7 +20,7 @@ export default extendTheme({
     },
   },
   fontFamily: {
-    display: "Inter, var(--joy-fontFamily-fallback)",
-    body: "Inter, var(--joy-fontFamily-fallback)",
+    display: "Inter, var(--font-family-sans, var(--joy-fontFamily-fallback))",
+    body: "Inter, var(--font-family-sans, var(--joy-fontFamily-fallback))",
   },
 });

@@ -1,0 +1,13 @@
+@import url("https://cdn.investigativedata.org/style/base.min.css");
+
+:root {
+  --max-width: 1200px;
+  --border-radius: 0;
+  --font-mono: "Sligoil Micro", "Inconsolata", ui-monospace, Menlo, Monaco,
+    "Cascadia Mono", "Segoe UI Mono", "Roboto Mono", "Oxygen Mono",
+    "Ubuntu Monospace", "Source Code Pro", "Fira Mono", "Droid Sans Mono",
+    "Courier New", monospace;
+  --font-main: "Inter", Arial, sans-serif;
+  --joy-fontFamily-body: var(--font-main);
+  --joy-fontFamily-display: var(--font-main);
+}

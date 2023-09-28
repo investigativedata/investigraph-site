@@ -30,7 +30,8 @@ const getReversedData = async (
   schema: string,
   entityId: string
 ): Promise<Reversed> => {
-  const { entities } = await api.getEntities(dataset, {
+  const { entities } = await api.getEntities({
+    dataset,
     schema,
     reverse: entityId,
     nested: true,
@@ -43,8 +44,9 @@ export const getData = async (params: Params): Promise<Data> => {
   const entityId = params.slug[0];
   const [dataset, entity, reversedResult] = await Promise.all([
     api.getDataset(params.dataset),
-    api.getEntity(params.dataset, entityId),
-    api.getEntities(params.dataset, {
+    api.getEntity(entityId),
+    api.getEntities({
+      dataset: params.dataset,
       reverse: entityId,
       dehydrate: true,
       limit: 0,

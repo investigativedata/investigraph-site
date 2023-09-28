@@ -31,12 +31,12 @@ export default async function EntitiesPage({
   }
 
   const query = {
-    ...getPublicQuery(searchParams),
+    ...getPublicQuery({...searchParams, dataset: params.dataset}),
     featured: true,
     nested: true,
     limit: 10,
   };
-  const result = await api.getEntities(params.dataset, query);
+  const result = await api.getEntities(query);
   const crumbs = [
     {
       label: "Catalog",

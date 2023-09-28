@@ -12,22 +12,15 @@ import type { INKDataset } from "~/lib/ftm/types";
 
 type Props = {
   readonly result: IEntitiesResult;
-  readonly dataset: INKDataset;
 };
 
 export default function EntitiesScreen(props: Props) {
-  const { dataset, result } = props;
+  const { result } = props;
   return (
     <Stack sx={{ position: "relative", pt: 2 }}>
-      <DatasetHeader dataset={dataset} />
       <Typography level="h3" color="primary" sx={{ mt: 4 }}>
         {result.total} entities
       </Typography>
-      {result.total < dataset.coverage.entities && (
-        <Typography level="body-lg" color="neutral">
-          This dataset contains {dataset.coverage.entities} entities in total.
-        </Typography>
-      )}
       <List sx={{ mt: 2 }}>
         {result.entities.map((e) => (
           <ListItem key={e.id} style={{ display: "block" }}>

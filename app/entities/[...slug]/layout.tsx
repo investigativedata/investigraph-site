@@ -2,7 +2,7 @@
 
 import Context from "~/lib/ftm/context";
 
-type Params = { dataset: string; slug: string[] };
+type Params = { slug: string[] };
 
 export default function Layout({
   children,
@@ -11,7 +11,7 @@ export default function Layout({
   children: React.ReactNode;
   params: Params;
 }) {
-  const urlPrefix = `/datasets/${params.dataset}/entities`;
+  const urlPrefix = "/entities";
   const ctx = { entityId: params.slug[0], urlPrefix };
   return <Context.Provider value={ctx}>{children}</Context.Provider>;
 }

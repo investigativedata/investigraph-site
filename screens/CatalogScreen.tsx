@@ -13,7 +13,7 @@ export default function CatalogScreen({ catalog }: { catalog: INKCatalog }) {
       <Headline level="h1" color="primary">
         Data catalog
       </Headline>
-      <Catalog catalog={catalog} detail={true} />
+      <Catalog catalog={catalog} detail />
     </Stack>
   );
 }

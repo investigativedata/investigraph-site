@@ -9,13 +9,9 @@ import type {
 
 import api from "~/api";
 
-export interface Params extends IEntityUrlParams {
-  readonly dataset: string;
-}
-
 interface Data {
-  readonly dataset: INKDataset;
   readonly entity: IEntityDatum;
+  readonly datasets: INKDataset[];
   readonly reversed: { [key: string]: IEntityDatum[] };
   readonly reversedTotal: number;
 }
@@ -26,12 +22,10 @@ interface Reversed {
 }
 
 const getReversedData = async (
-  dataset: string,
   schema: string,
   entityId: string
 ): Promise<Reversed> => {
   const { entities } = await api.getEntities({
-    dataset,
     schema,
     reverse: entityId,
     nested: true,
@@ -40,19 +34,18 @@ const getReversedData = async (
   return { schema, entities };
 };
 
-export const getData = async (params: Params): Promise<Data> => {
+export const getData = async (params: IEntityUrlParams): Promise<Data> => {
   const entityId = params.slug[0];
-  const [dataset, entity, reversedResult] = await Promise.all([
-    api.getDataset(params.dataset),
+  const [catalog, entity, reversedResult] = await Promise.all([
+    api.getCatalog(),
     api.getEntity(entityId),
     api.getEntities({
-      dataset: params.dataset,
       reverse: entityId,
       dehydrate: true,
       limit: 0,
     }),
   ]);
-  if (!dataset || !entity) notFound();
+  if (!entity) notFound();
   const { slug } = getEntityUrlParams(entity);
   if (slug[1] !== params.slug[1] || entity.id !== entityId) {
     const urlPrefix = `/datasets/${params.dataset}/entities`;
@@ -60,11 +53,19 @@ export const getData = async (params: Params): Promise<Data> => {
   }
   const reversedResults = await Promise.all(
     reversedResult.coverage.schemata.map((schema) =>
-      getReversedData(params.dataset, schema.name, entityId)
+      getReversedData(schema.name, entityId)
     )
   );
   const reversed = Object.fromEntries(
     reversedResults.map(({ schema, entities }) => [schema, entities])
   );
-  return { dataset, entity, reversed, reversedTotal: reversedResult.total };
+  const datasets = catalog.datasets.filter(
+    (d) => entity.datasets.indexOf(d.name) > -1
+  );
+  return {
+    entity,
+    datasets,
+    reversed,
+    reversedTotal: reversedResult.total,
+  };
 };

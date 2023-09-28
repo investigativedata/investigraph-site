@@ -22,14 +22,13 @@ import { Headline, Paragraph } from "~/components/common";
 import Link from "~/components/common/Link";
 
 export default function DatasetScreen({ dataset }: { dataset: INKDataset }) {
-  const basePath = usePathname();
-  const entitiesPath = `${basePath}/entities`;
+  const entitiesUrl = `/entities?dataset=${dataset.name}`;
   const getSearchUrl = (param: string, value: string) =>
-    `${entitiesPath}?${param}=${value}`;
+    `${entitiesUrl}&${param}=${value}`;
   return (
     <Stack sx={{ position: "relative", pt: 2 }}>
       <DatasetHeader dataset={dataset} />
-      <Link href={entitiesPath}>
+      <Link href={entitiesUrl}>
         <Button
           startDecorator={<ChevronRightIcon />}
           variant="solid"

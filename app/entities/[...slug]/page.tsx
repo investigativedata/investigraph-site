@@ -1,38 +1,39 @@
 import type { Metadata } from "next";
 
+import type { IEntityUrlParams } from "~/lib/ftm/types";
+
 import Page from "~/components/Page";
 import Ellipsis from "~/components/common/Ellipsis";
 import EntityScreen from "~/screens/EntityScreen";
 
-import type { Params } from "./data";
 import { getData } from "./data";
 
 export async function generateMetadata({
   params,
 }: {
-  params: Params;
+  params: IEntityUrlParams;
 }): Promise<Metadata> {
-  const { entity, dataset } = await getData(params);
+  const { entity } = await getData(params);
   return {
-    title: `${entity.caption} - ${dataset.title}`,
-    description: `${entity.caption} is a ${entity.schema} found in the dataset ${dataset.title}. ${dataset.summary}`,
+    title: entity.caption,
+    description: `${entity.caption} is a ${entity.schema}`,
   };
 }
 
-export default async function EntityPage({ params }: { params: Params }) {
-  const { dataset, entity, reversed, reversedTotal } = await getData(params);
+export default async function EntityPage({
+  params,
+}: {
+  params: IEntityUrlParams;
+}) {
+  const { entity, datasets, reversed, reversedTotal } = await getData(params);
   const crumbs = [
     {
       label: "Catalog",
       url: "/datasets",
     },
     {
-      label: <Ellipsis text={dataset.title} />,
-      url: `/datasets/${params.dataset}`,
-    },
-    {
       label: "Entities",
-      url: `/datasets/${params.dataset}/entities`,
+      url: "/entities",
     },
     {
       label: <Ellipsis text={entity.caption} />,
@@ -43,6 +44,7 @@ export default async function EntityPage({ params }: { params: Params }) {
     <Page crumbs={crumbs}>
       <EntityScreen
         entity={entity}
+        datasets={datasets}
         reversed={reversed}
         reversedTotal={reversedTotal}
       />

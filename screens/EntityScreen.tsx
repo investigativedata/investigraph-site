@@ -5,6 +5,7 @@ import Chip from "@mui/joy/Chip";
 import Stack from "@mui/joy/Stack";
 
 import { getProxy, getSchema } from "~/lib/ftm";
+import Dataset from "~/lib/ftm/components/Dataset";
 import EntitiesTable from "~/lib/ftm/components/EntitiesTable";
 import {
   EntityCaption,
@@ -14,12 +15,13 @@ import {
 import EntityProperty from "~/lib/ftm/components/Property";
 import PropertyStack from "~/lib/ftm/components/PropertyStack";
 import PropertyTable from "~/lib/ftm/components/PropertyTable";
-import type { Entity, TEntity } from "~/lib/ftm/types";
+import type { Entity, INKDataset, TEntity } from "~/lib/ftm/types";
 
 import { Headline, Paragraph } from "~/components/common/typo";
 
 type Props = {
   readonly entity: TEntity;
+  readonly datasets: INKDataset[];
   readonly reversed: { [key: string]: TEntity[] };
   readonly reversedTotal: number;
 };
@@ -70,10 +72,17 @@ export default function EntityScreen(props: Props) {
       <PropertyStack entity={entity} props={stackProps} />
       {hasTableProps && (
         <>
-          <Headline level="h5">Properties</Headline>
+          <Headline level="h4">Properties</Headline>
           <PropertyTable entity={entity} props={tableProps} />
         </>
       )}
+      <Headline level="h4">Datasets</Headline>
+      <Paragraph>
+        This entity is part of {props.datasets.length} dataset(s)
+      </Paragraph>
+      {props.datasets.map((d) => (
+        <Dataset dataset={d} detail />
+      ))}
       {props.reversedTotal > 0 && (
         <Stack>
           <Headline level="h4">
@@ -81,7 +90,7 @@ export default function EntityScreen(props: Props) {
           </Headline>
           {Object.keys(props.reversed).map((schema) => (
             <section key={schema}>
-              <Headline level="h5" color="neutral">
+              <Headline level="h4" color="neutral">
                 {getSchema(schema).plural}
               </Headline>
               <Paragraph>{getSchema(schema).description}</Paragraph>

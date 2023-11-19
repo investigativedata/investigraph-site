@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
-import { SITE_TITLE, SITE_DESCRIPTION } from "~/config";
+
+import { SITE_DESCRIPTION, SITE_TITLE } from "~/config";
+
+import "./theme.css";
 
 export const metadata: Metadata = {
   title: SITE_TITLE,

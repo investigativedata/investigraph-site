@@ -20,7 +20,12 @@ const HomeLink = styled(Link)(({ theme }) => ({
 export default function Navbar() {
   return (
     <Nav sx={{ boxShadow: "sm" }} role="navigation" className={styles.navbar}>
-      <Typography level="h1" fontSize="md" color="neutral">
+      <Typography
+        level="h1"
+        fontSize="md"
+        color="neutral"
+        sx={{ fontFamily: "var(--font-family-mono)" }}
+      >
         <HomeLink href="/datasets">{SITE}</HomeLink>
       </Typography>
     </Nav>

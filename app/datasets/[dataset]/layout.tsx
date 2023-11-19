@@ -11,6 +11,6 @@ export default function Layout({
   children: React.ReactNode;
   params: Params;
 }) {
-  const urlPrefix = `/datasets/${params.dataset}/entities`;
+  const urlPrefix = "/entities";
   return <Context.Provider value={{ urlPrefix }}>{children}</Context.Provider>;
 }

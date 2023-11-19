@@ -10,24 +10,20 @@ import { DatasetHeader } from "~/lib/ftm/components/Dataset";
 import EntityCard from "~/lib/ftm/components/EntityCard";
 import type { INKDataset } from "~/lib/ftm/types";
 
+import SearchForm from "~/components/SearchForm";
+
 type Props = {
   readonly result: IEntitiesResult;
-  readonly dataset: INKDataset;
 };
 
 export default function EntitiesScreen(props: Props) {
-  const { dataset, result } = props;
+  const { result } = props;
   return (
     <Stack sx={{ position: "relative", pt: 2 }}>
-      <DatasetHeader dataset={dataset} />
+      <SearchForm />
       <Typography level="h3" color="primary" sx={{ mt: 4 }}>
         {result.total} entities
       </Typography>
-      {result.total < dataset.things.total && (
-        <Typography level="body1" color="neutral">
-          This dataset contains {dataset.things.total} entities in total.
-        </Typography>
-      )}
       <List sx={{ mt: 2 }}>
         {result.entities.map((e) => (
           <ListItem key={e.id} style={{ display: "block" }}>

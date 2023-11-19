@@ -22,14 +22,13 @@ import { Headline, Paragraph } from "~/components/common";
 import Link from "~/components/common/Link";
 
 export default function DatasetScreen({ dataset }: { dataset: INKDataset }) {
-  const basePath = usePathname();
-  const entitiesPath = `${basePath}/entities`;
+  const entitiesUrl = `/entities?dataset=${dataset.name}`;
   const getSearchUrl = (param: string, value: string) =>
-    `${entitiesPath}?${param}=${value}`;
+    `${entitiesUrl}&${param}=${value}`;
   return (
     <Stack sx={{ position: "relative", pt: 2 }}>
       <DatasetHeader dataset={dataset} />
-      <Link href={entitiesPath}>
+      <Link href={entitiesUrl}>
         <Button
           startDecorator={<ChevronRightIcon />}
           variant="solid"
@@ -51,13 +50,13 @@ export default function DatasetScreen({ dataset }: { dataset: INKDataset }) {
         </Grid>
       </Grid>
 
-      {dataset.things.total > 0 && (
+      {dataset.coverage.entities > 0 && (
         <Grid container spacing={2} sx={{ flexGrow: 1 }}>
           <Grid sm={12} md={6}>
             <Headline level="h3">Types of entities</Headline>
             <Table aria-label="schemata entities count">
               <tbody>
-                {dataset.things.schemata
+                {dataset.coverage.schemata
                   .sort((a, b) => b.count - a.count)
                   .map((s) => (
                     <tr key={s.name}>
@@ -72,12 +71,12 @@ export default function DatasetScreen({ dataset }: { dataset: INKDataset }) {
               </tbody>
             </Table>
           </Grid>
-          {dataset.things.countries.length > 0 && (
+          {dataset.coverage.countries.length > 0 && (
             <Grid sm={12} md={6}>
               <Headline level="h3">Countries</Headline>
               <Table aria-label="counries entities count">
                 <tbody>
-                  {dataset.things.countries
+                  {dataset.coverage.countries
                     .sort((a, b) => b.count - a.count)
                     .map((s) => (
                       <tr key={s.code}>
